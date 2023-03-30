@@ -8,7 +8,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CurrencyConversionService {
-    private CurrencyExchangeRepo exchangeRepo;
+
+    private final CurrencyExchangeRepo exchangeRepo;
+
+    public CurrencyConversionService(CurrencyExchangeRepo exchangeRepo) {
+        this.exchangeRepo = exchangeRepo;
+    }
 
     public CurrencyConversionResponse convertCurrency(String baseCurrency, String targetCurrency, Double amount) {
         CurrencyExchangeResponse response = exchangeRepo.getExchangeRate(baseCurrency, targetCurrency);
@@ -18,7 +23,7 @@ public class CurrencyConversionService {
         currencyConversionResponse.setBase(response.getBase());
         currencyConversionResponse.setDate(response.getDate().toString());
         currencyConversionResponse.setRates(response.getRates());
-        currencyConversionResponse.getRates().put(targetCurrency,exchangeRate);
+        currencyConversionResponse.getRates().put(targetCurrency, exchangeRate);
         currencyConversionResponse.setConvertedAmount(convertedAmount);
         return currencyConversionResponse;
     }

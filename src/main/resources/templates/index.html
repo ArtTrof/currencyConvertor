@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Currency Converter</title>
+</head>
+<body>
+<h1>Currency Converter</h1>
+<form method="GET" action="#" th:action="@{/convert}">
+    <label for="baseCurrency">Base Currency:</label>
+    <select id="baseCurrency" name="baseCurrency">
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+    </select>
+    <br/><br/>
+    <label for="targetCurrency">Target Currency:</label>
+    <select id="targetCurrency" name="targetCurrency">
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+    </select>
+    <br/><br/>
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" name="amount" min="0.01" step="0.01" required/>
+    <br/><br/>
+    <button type="submit">Convert</button>
+</form>
+<br/><br/>
+<div th:if="${result != null}">
+    <h2>Conversion Result:</h2>
+    <p>Base Currency: <span th:text="${result.base}"></span></p>
+    <p>Date: <span th:text="${result.date}"></span></p>
+    <p th:each="rate : ${result.rates}">
+        <span th:text="${rate.key}"></span>: <span th:text="${rate.value}"></span>
+    </p>
+    <p>Converted Amount: <span th:text="${result.convertedAmount}"></span> <span th:text="${result.targetCurrency}"></span></p>
+</div>
+</body>
+</html>
