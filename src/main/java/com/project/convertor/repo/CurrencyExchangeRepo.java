@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "currency-exchange", url = "https://api.exchangeratesapi.io")
 public interface CurrencyExchangeRepo {
-    @GetMapping("/latest")
+    @GetMapping(value = "/latest",headers = "apikey: SRRMfNmky3caMc0j62nYtkG6mmXP8u0L")
     CurrencyExchangeResponse getExchangeRate(@RequestParam("base") String fromCurrency,
                                              @RequestParam("symbols") String toCurrency);
 }

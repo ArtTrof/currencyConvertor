@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CurrencyConversionService {
-
+    @Autowired
     private final CurrencyExchangeRepo exchangeRepo;
 
     public CurrencyConversionService(CurrencyExchangeRepo exchangeRepo) {
